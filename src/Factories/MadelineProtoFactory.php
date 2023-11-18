@@ -3,6 +3,7 @@
 namespace Hu\MadelineProto\Factories;
 
 use danog\MadelineProto\API;
+use danog\MadelineProto\Settings;
 use Hu\MadelineProto\MadelineProto;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
@@ -64,13 +65,9 @@ class MadelineProtoFactory
      *                           file will be used
      * @return MadelineProto
      */
-    public function make(string $sessionFile, array $config = null)
+    public function make(string $sessionFile, ?Settings $settings = null)
     {
-        if (is_null($config)) {
-            $config = config('telegram.settings');
-        }
-
-        $client = new API(storage_path("app/telegram/$sessionFile"), $config);
+        $client = new API(storage_path("app/telegram/$sessionFile"), $settings ?? new Settings());
 
         return new MadelineProto($client);
     }

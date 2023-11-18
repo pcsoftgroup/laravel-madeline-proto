@@ -27,7 +27,7 @@ class MadelineProtoServiceProvider extends ServiceProvider
         $this->app->singleton('madeline-proto', function (Application $app) {
             $sessionFactory = $app->make('madeline-proto-factory');
 
-            return $sessionFactory->make(config('telegram.sessions.single.session_file'), config('telegram.settings'));
+            return $sessionFactory->make(config('telegram.sessions.single.session_file'));
         });
         $this->app->alias('madeline-proto', MadelineProto::class);
 
